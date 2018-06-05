@@ -14,7 +14,7 @@ tf.app.flags.DEFINE_integer('val_interval', 100, '')
 tf.app.flags.DEFINE_integer('crop_num', 1, '')
 tf.app.flags.DEFINE_integer('slice_num', 72, '')
 tf.app.flags.DEFINE_string('model_save_path', '/home/give/PycharmProjects/MICCAI2016_3DDSN/outputs/snaps', '')
-tf.app.flags.DEFINE_boolean('restore_flag', False, '')
+tf.app.flags.DEFINE_boolean('restore_flag', True, '')
 tf.app.flags.DEFINE_string('model_restore_path', '/home/give/PycharmProjects/MICCAI2016_3DDSN/outputs/snaps', '')
 tf.app.flags.DEFINE_string('summary_dir', '/home/give/PycharmProjects/MICCAI2016_3DDSN/outputs/logs', '')
 tf.app.flags.DEFINE_integer('print_interval', 5, '')
@@ -106,11 +106,14 @@ def train():
                                                                  ignore_missing_vars=True)
             variable_restore_op(sess)
             sess.run(tf.assign(global_step, start_step))
+        print('Start iterator!')
         for step in range(start_step, FLAGS.max_steps + start_step):
             # train_img_path_batch, train_gt_path_batch = train_generator.__next__()
             # train_image_batch, train_gt_batch = Reader.processing1(train_img_path_batch, train_gt_path_batch,
             #                                                        crop_num=FLAGS.crop_num)
+            print('Start Reading')
             train_image_batch, train_gt_batch = reader.get_next_batch(is_training=True)
+            print('Batch Images: ', np.shape(train_image_batch))
             # print(np.shape(train_image_batch))
             # train_image_batch, train_gt_batch = Reader.processing2(train_img_path_batch, train_gt_path_batch,
             #                                                        slice_num=FLAGS.slice_num)

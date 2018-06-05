@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
-import SimpleITK as itk
 import pydicom
+import SimpleITK as itk
 import numpy as np
 from PIL import Image, ImageDraw
 import gc

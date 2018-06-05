@@ -163,8 +163,8 @@ def build_loss(gt_tensor, pred_last, pred_6, pred_3, global_step):
     cross_entropy_last = tf.reduce_mean(weights_cross_entropy_loss(pred_last, gt_tensor, weights)[0])
     cross_entropy_6 = tf.reduce_mean(weights_cross_entropy_loss(pred_6, gt_tensor, weights)[0])
     cross_entropy_3 = tf.reduce_mean(weights_cross_entropy_loss(pred_3, gt_tensor, weights)[0])
-    lambda1 = tf.train.exponential_decay(0.4, global_step=global_step, decay_steps=5000, decay_rate=0.95, staircase=True)
-    lambda2 = tf.train.exponential_decay(0.3, global_step=global_step, decay_steps=5000, decay_rate=0.95, staircase=True)
+    lambda1 = tf.train.exponential_decay(0.4, global_step=global_step, decay_steps=1000, decay_rate=0.95, staircase=True)
+    lambda2 = tf.train.exponential_decay(0.3, global_step=global_step, decay_steps=1000, decay_rate=0.95, staircase=True)
     tf.summary.scalar('lambda1', lambda1)
     tf.summary.scalar('lambda2', lambda2)
 
